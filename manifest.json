@@ -1,0 +1,10 @@
+{
+    "name": "Initiative Tracker",
+    "short_name": "InitTracker",
+    "theme_color": "#ffffff",
+    "background_color": "#000000",
+    "display": "browser",
+    "orientation": "portrait",
+    "scope": "/",
+    "start_url": "/"
+}
