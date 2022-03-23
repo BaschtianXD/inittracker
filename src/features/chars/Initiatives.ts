@@ -10,7 +10,7 @@ const initialState: InitiativeState = { // TODO clean this up
 
 interface SetInitiativePayload {
     characterIndex: number,
-    initiative: number
+    initiative?: number
 }
 
 export const initiativeSlice = createSlice({

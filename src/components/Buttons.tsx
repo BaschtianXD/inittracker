@@ -9,7 +9,7 @@ interface ButtonProps {
 
 export function PrimaryButton(props: ButtonProps) {
     return (
-        <button className="flex flex-row items-center gap-1 bg-primary rounded p-1 select-none text-lg" onClick={props.enabled === undefined || props.enabled ? props.onClick : undefined}>
+        <button className="flex flex-row items-center gap-1 bg-primary rounded p-1 select-none" onClick={props.enabled === undefined || props.enabled ? props.onClick : undefined}>
             {
                 props.icon ?
                     <div>

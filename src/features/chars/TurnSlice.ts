@@ -17,11 +17,14 @@ export const turnSlice = createSlice({
         },
         resetTurn: state => {
             state.currentTurn = 0
+        },
+        setTurn: (state, action: PayloadAction<number>) => {
+            state.currentTurn = action.payload
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { advanceTurn, resetTurn } = turnSlice.actions
+export const { advanceTurn, resetTurn, setTurn } = turnSlice.actions
 
 export default turnSlice.reducer
