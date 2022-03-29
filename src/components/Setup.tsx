@@ -90,7 +90,7 @@ function Setup() {
                                             </div>
                                             <div className="flex flex-row gap-2">
                                                 <label>Allegiance</label>
-                                                <select value={newCharAllegiance} onChange={event => setNewCharAllegiance(Number(event.target.value))}>
+                                                <select value={newCharAllegiance} onChange={event => setNewCharAllegiance(Number(event.target.value))} className="bg-secondary rounded">
                                                     <option value={0}>Friendly</option>
                                                     <option value={1}>Enemy</option>
                                                     <option value={2}>Neutral</option>
@@ -98,7 +98,7 @@ function Setup() {
                                             </div>
                                             <div className="flex flex-row gap-2">
                                                 <p>Type</p>
-                                                <select value={newCharType} onChange={event => setNewCharType(Number(event.target.value))}>
+                                                <select value={newCharType} onChange={event => setNewCharType(Number(event.target.value))} className="bg-secondary rounded">
                                                     <option value={0}>PC</option>
                                                     <option value={1}>NPC</option>
                                                 </select>
