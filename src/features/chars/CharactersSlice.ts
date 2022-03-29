@@ -13,32 +13,32 @@ const testState: CharacterState = { // TODO clean this up
             {
                 name: "Erokthan",
                 allegiance: CharacterAllegiance.Friendly,
-                type: CharacterType.Player
+                type: CharacterType.Pc
             },
             {
                 name: "Lini",
                 allegiance: CharacterAllegiance.Friendly,
-                type: CharacterType.Player
+                type: CharacterType.Pc
             },
             {
                 name: "Seoni",
                 allegiance: CharacterAllegiance.Friendly,
-                type: CharacterType.Player
+                type: CharacterType.Pc
             },
             {
                 name: "Ayva",
                 allegiance: CharacterAllegiance.Friendly,
-                type: CharacterType.Player
+                type: CharacterType.Pc
             },
             {
                 name: "Frederich",
                 allegiance: CharacterAllegiance.Friendly,
-                type: CharacterType.Player
+                type: CharacterType.Pc
             },
             {
                 name: "Diederich",
                 allegiance: CharacterAllegiance.Friendly,
-                type: CharacterType.Player
+                type: CharacterType.Pc
             },
             {
                 name: "Gegner",
@@ -54,32 +54,32 @@ const testState: CharacterState = { // TODO clean this up
                 {
                     name: "Erokthan",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Lini",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Seoni",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Ayva",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Frederich",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Diederich",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Gegner",
@@ -94,32 +94,32 @@ const testState: CharacterState = { // TODO clean this up
                 {
                     name: "Erokthan",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Lini",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Seoni",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Ayva",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Frederich",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Diederich",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
             ]
         },
@@ -129,102 +129,102 @@ const testState: CharacterState = { // TODO clean this up
                 {
                     name: "Erokthan",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Lini",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Seoni",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Ayva",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Frederich",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Diederich",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Döner",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Döner mit Käse",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Großer Döner",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Großer Döner mit Käse",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Börek",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Falaffeldöner",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Großer Falaffeldöner",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Lahmacum",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Lahmacum mit Käse",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Grillteller",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Überbackes Lammfilet mit Metaxasauce",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Halbes Hähnchen",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Gyros",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 },
                 {
                     name: "Überbackenes Gyros",
                     allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Player
+                    type: CharacterType.Pc
                 }
             ]
         },
@@ -270,12 +270,12 @@ export const characterSlice = createSlice({
             state.parties.push(party)
         },
         removeParty: (state, action: PayloadAction<number>) => {
-            state.parties.slice(action.payload, 1)
+            state.parties.splice(action.payload, 1)
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { setCurrentParty, addCharacter, removeCharacter, addEmptyParty, duplicateParty } = characterSlice.actions
+export const { setCurrentParty, addCharacter, removeCharacter, addEmptyParty, duplicateParty, removeParty } = characterSlice.actions
 
 export default characterSlice.reducer

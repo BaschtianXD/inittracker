@@ -12,15 +12,16 @@ function Fight() {
     const [currentTurn, setCurrentTurn] = useState(0)
     const [isInFight, setIsInFight] = useState(false)
 
-    const dispatch = useAppDispatch()
-
     const toggleIsInFight = () => {
-        console.log("Starting fight")
+
         if (isInFight) {
             setInits(new Map())
             setTurn(0)
+            setIsInFight(false)
+        } else if (Array.from(inits.values()).some(num => num > 0)) {
+            setIsInFight(!isInFight)
         }
-        setIsInFight(!isInFight)
+
     }
     const benched = chars?.map((char, index) => { return { char: char, index: index } }).filter(char => inits.get(char.char) === undefined)
     const upperChars = chars?.filter((char, index) => !isInFight || inits.get(char) !== undefined)

@@ -1,41 +1,133 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 import { useAppDispatch, useAppSelector } from "../app/hooks"
-import { setCurrentParty } from "../features/chars/CharactersSlice"
-import { VscAdd } from "react-icons/vsc";
+import { addCharacter, addEmptyParty, duplicateParty, removeParty, setCurrentParty } from "../features/chars/CharactersSlice"
+import { VscAdd, VscPerson, VscServerEnvironment } from "react-icons/vsc";
+import { PrimaryButton, SecondaryButton } from "./Buttons"
+import { CharacterAllegiance, CharacterType } from "../features/shared";
 
 function Setup() {
 
     const dispatch = useAppDispatch()
     const groups = useAppSelector(state => state.characterReducer.parties)
     const [expanded, setExpanded] = useState(undefined as number | undefined)
+    const [newParty, setNewParty] = useState(undefined as string | undefined)
+    const [newCharacter, setNewCharacter] = useState(undefined as string | undefined)
+    const [deleteConfirm, setDeleteConfirm] = useState(false)
+
+    const [newCharAllegiance, setNewCharAllegiance] = useState(CharacterAllegiance.Friendly)
+    const [newCharType, setNewCharType] = useState(CharacterType.Pc)
+
+
+    const closeNewCharacter = () => {
+        setNewCharacter(undefined)
+        setNewCharAllegiance(0)
+        setNewCharType(0)
+    }
+
+    const getCharacterIcon = (allegiance: CharacterAllegiance, type: CharacterType) => {
+        const color = allegiance === CharacterAllegiance.Friendly ? "text-green-500" : allegiance === CharacterAllegiance.Neutral ? "text-neutral-900" : "text-red-700"
+        if (type === CharacterType.Pc) {
+            return (
+                <VscPerson className={color} />
+            )
+        } else {
+            return (
+                <VscServerEnvironment className={color} />
+            )
+        }
+    }
 
 
     return (
         <div className="mt-2">
             <div className="text-center flex flex-row justify-around ">
                 <p className="text-lg font-bold">Parties</p>
-                {/* <FontAwesomeIcon icon={faPlus} className="absolute top-3 right-4" /> */}
-                <VscAdd className="absolute right-4 scale-125" />
+                <VscAdd className="absolute right-4 scale-125" onClick={event => {
+                    setNewParty(newParty !== undefined ? undefined : "")
+                }} />
             </div>
+            {newParty !== undefined ?
+                <div className="flex flex-row content-evenly m-2">
+                    <input className="grow rounded px-1 bg-secondary mr-4" value={newParty} type="text" onChange={event => setNewParty(event.target.value)}></input>
+                    <PrimaryButton text="Create" onClick={() => {
+                        dispatch(addEmptyParty(newParty))
+                        setNewParty(undefined)
+                    }} />
+                </div>
+                :
+                <></>
+            }
             <div className=" grow flex flex-col gap-1">
                 {groups.map((group, index) => (
                     <div key={group.name}>
-                        <div className="bg-secondary rounded m-2 p-1" onClick={() => { setExpanded(expanded === index ? undefined : index) }}>{group.name}</div>
+                        <div className="bg-secondary rounded m-2 p-1" onClick={() => { setExpanded(expanded === index ? undefined : index); setDeleteConfirm(false); closeNewCharacter() }}>{group.name}</div>
                         {expanded === index ?
                             <div className="overflow-hidden">
-                                <div className="flex flex-col gap-2 transition-[max-height] duration-1000">
-                                    <div className="flex flex-row gap-1 mx-2">
-                                        <button className="bg-primary p-1 rounded select-none" onClick={() => dispatch(setCurrentParty(index))}>Set as current party</button>
-                                        <button className="bg-secondary p-1 rounded select-none">Add character</button>
-                                        <button className="bg-secondary p-1 rounded select-none">Duplicate party</button>
-                                        <button className="bg-secondary p-1 rounded border-solid border-4 border-red-600 select-none">Delete party</button>
-                                    </div>
-                                    <div className="flex flex-col gap-2 divide-y-2">
+                                <div className="flex flex-col gap-2 ">
+                                    {!deleteConfirm && newCharacter === undefined ?
+                                        <div className="flex flex-row gap-1 mx-2">
+                                            <PrimaryButton text="Set as current party" onClick={() => dispatch(setCurrentParty(index))} />
+                                            <SecondaryButton text="Add character" onClick={() => setNewCharacter(newCharacter !== undefined ? undefined : "")} />
+                                            <SecondaryButton text="Duplicate party" onClick={() => dispatch(duplicateParty(index))} />
+                                            <SecondaryButton text="Delete party" onClick={() => setDeleteConfirm(true)} />
+                                        </div>
+                                        :
+                                        <></>
+                                    }
+                                    {deleteConfirm ?
+                                        <div className="flex flex-row gap-1 mx-2 justify-evenly">
+                                            <SecondaryButton text="Do not delete party" onClick={() => setDeleteConfirm(false)} />
+                                            <PrimaryButton text="Delete party" onClick={() => { dispatch(removeParty(index)); setDeleteConfirm(false); setExpanded(undefined) }} />
+                                        </div>
+                                        :
+                                        <></>
+                                    }
+                                    {newCharacter !== undefined ?
+                                        <div className="flex flex-col m-2 gap-2">
+                                            <div className="flex flex-row gap-2">
+                                                <label>Name</label>
+                                                <input className="grow rounded px-1 bg-secondary" value={newCharacter} type="text" onChange={event => setNewCharacter(event.target.value)} autoComplete="off" list="autocompleteOff" ></input>
+                                            </div>
+                                            <div className="flex flex-row gap-2">
+                                                <label>Allegiance</label>
+                                                <select value={newCharAllegiance} onChange={event => setNewCharAllegiance(Number(event.target.value))}>
+                                                    <option value={0}>Friendly</option>
+                                                    <option value={1}>Enemy</option>
+                                                    <option value={2}>Neutral</option>
+                                                </select>
+                                            </div>
+                                            <div className="flex flex-row gap-2">
+                                                <p>Type</p>
+                                                <select value={newCharType} onChange={event => setNewCharType(Number(event.target.value))}>
+                                                    <option value={0}>PC</option>
+                                                    <option value={1}>NPC</option>
+                                                </select>
+                                            </div>
+                                            <div className="flex flex-row gap-2">
+                                                <PrimaryButton text="Add Character" onClick={() => {
+                                                    dispatch(addCharacter({
+                                                        partyIndex: index, character: {
+                                                            name: newCharacter,
+                                                            allegiance: newCharAllegiance,
+                                                            type: newCharType
+                                                        }
+                                                    }))
+                                                    closeNewCharacter()
+                                                }} />
+                                                <SecondaryButton text="Cancel" onClick={closeNewCharacter} />
+                                            </div>
+                                        </div>
+                                        :
+                                        <></>
+                                    }
+                                    <div className="flex flex-col divide-y-2">
                                         {group.characters.map(char => (
-                                            <div key={char.name} className="flex flex-row justify-between">
-                                                <p className="ml-4">{char.name}</p>
+                                            <div key={char.name} className="flex flex-row justify-between items-center">
+                                                <div className="flex flex-row items-center ml-2 gap-2">
+                                                    {getCharacterIcon(char.allegiance, char.type)}
+                                                    <p>{char.name}</p>
+                                                </div>
+
                                                 <button className="mr-4 select-none">Delete</button>
                                             </div>
                                         ))}
@@ -49,7 +141,7 @@ function Setup() {
                     </div>
                 ))}
             </div>
-        </div>
+        </div >
     )
 }
 

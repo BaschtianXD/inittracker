@@ -6,11 +6,14 @@ export type Character = {
 
 export enum CharacterAllegiance {
     Friendly,
-    Enemy
+    Enemy,
+    Neutral
 }
 
+const foo = Object.entries(CharacterAllegiance)
+
 export enum CharacterType {
-    Player,
+    Pc,
     Npc
 }
 
