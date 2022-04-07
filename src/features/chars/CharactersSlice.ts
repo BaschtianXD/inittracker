@@ -2,51 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Character, CharacterAllegiance, CharacterType, Party } from '../shared'
 
 interface CharacterState {
-    currentParty?: Party,
+    currentParty?: number,
     parties: Party[]
 }
 
 const testState: CharacterState = { // TODO clean this up
-    currentParty: {
-        name: "Pathfinder 1",
-        characters: [
-            {
-                name: "Erokthan",
-                allegiance: CharacterAllegiance.Friendly,
-                type: CharacterType.Pc
-            },
-            {
-                name: "Lini",
-                allegiance: CharacterAllegiance.Friendly,
-                type: CharacterType.Pc
-            },
-            {
-                name: "Seoni",
-                allegiance: CharacterAllegiance.Friendly,
-                type: CharacterType.Pc
-            },
-            {
-                name: "Ayva",
-                allegiance: CharacterAllegiance.Friendly,
-                type: CharacterType.Pc
-            },
-            {
-                name: "Frederich",
-                allegiance: CharacterAllegiance.Friendly,
-                type: CharacterType.Pc
-            },
-            {
-                name: "Diederich",
-                allegiance: CharacterAllegiance.Friendly,
-                type: CharacterType.Pc
-            },
-            {
-                name: "Gegner",
-                allegiance: CharacterAllegiance.Enemy,
-                type: CharacterType.Npc
-            },
-        ]
-    },
+    currentParty: 0,
     parties: [
         {
             name: "Pathfinder 1",
@@ -238,11 +199,11 @@ const initialState: CharacterState = { // TODO clean this up
 
 export const characterSlice = createSlice({
     name: 'characters',
-    initialState: testState,
+    initialState: initialState,
     reducers: {
         setCurrentParty: (state, action: PayloadAction<number>) => {
             if (state.parties[action.payload]) {
-                state.currentParty = state.parties[action.payload]
+                state.currentParty = action.payload
             }
         },
         addCharacter: (state, action: PayloadAction<{ partyIndex: number, character: Character }>) => {
@@ -270,6 +231,9 @@ export const characterSlice = createSlice({
             state.parties.push(party)
         },
         removeParty: (state, action: PayloadAction<number>) => {
+            if (action.payload === state.currentParty) {
+                state.currentParty = undefined
+            }
             state.parties.splice(action.payload, 1)
         }
     },

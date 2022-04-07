@@ -4,10 +4,18 @@ import FightCharacter from "./FightCharacter"
 import { VscPlay } from "react-icons/vsc";
 import { PrimaryButton, SecondaryButton } from "./Buttons"
 import { Character } from "../features/shared"
-import { setTurn } from "../features/chars/TurnSlice";
 
 function Fight() {
-    const chars = useAppSelector(state => state.characterReducer.currentParty?.characters)
+    const chars = useAppSelector(state => {
+        if (state.characterReducer.currentParty !== undefined) {
+            return state.characterReducer.parties[state.characterReducer.currentParty].characters
+        } else {
+            console.log(state.characterReducer.currentParty)
+            console.log(state.characterReducer.parties)
+            console.log("No party selected")
+            return []
+        }
+    })
     const [inits, setInits] = useState(new Map() as Map<Character, number>)
     const [currentTurn, setCurrentTurn] = useState(0)
     const [isInFight, setIsInFight] = useState(false)
@@ -16,7 +24,7 @@ function Fight() {
 
         if (isInFight) {
             setInits(new Map())
-            setTurn(0)
+            setCurrentTurn(0)
             setIsInFight(false)
         } else if (Array.from(inits.values()).some(num => num > 0)) {
             setIsInFight(!isInFight)
@@ -119,7 +127,7 @@ function Fight() {
                 </div>
                 :
                 <div className="absolute top-1/2 w-full text-center">
-                    <p>Go to setup and select a party</p>
+                    <p>Go to setup and select a current party</p>
                 </div>
             }
         </div>

@@ -5,11 +5,12 @@ interface ButtonProps {
     icon?: ReactNode
     onClick?: () => void
     enabled?: boolean
+    className?: string
 }
 
 export function PrimaryButton(props: ButtonProps) {
     return (
-        <button className="flex flex-row items-center gap-1 bg-primary rounded p-1 select-none" onClick={props.enabled === undefined || props.enabled ? props.onClick : undefined}>
+        <button className={"flex flex-row items-center gap-1 bg-primary rounded p-1 select-none" + (props.className ?? "")} onClick={props.enabled === undefined || props.enabled ? props.onClick : undefined}>
             {
                 props.icon ?
                     <div>
@@ -25,7 +26,7 @@ export function PrimaryButton(props: ButtonProps) {
 
 export function SecondaryButton(props: ButtonProps) {
     return (
-        <button className="flex flex-row items-center gap-1 bg-secondary rounded p-1 select-none" onClick={props.enabled === undefined || props.enabled ? props.onClick : undefined}>
+        <button className={"flex flex-row items-center gap-1 bg-secondary rounded p-1 select-none" + (props.className ?? "")} onClick={props.enabled === undefined || props.enabled ? props.onClick : undefined}>
             {
                 props.icon ?
                     <div>
