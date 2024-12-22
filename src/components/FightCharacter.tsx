@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Character, CharacterAllegiance } from '../features/shared'
+import { Input } from './ui/input'
 
 type FightCharacterProps = {
     character: Character
@@ -26,7 +27,7 @@ function FightCharacter(props: FightCharacterProps) {
             }}>{props.character.name}</p>
             {props.inFight && !editMode ?
                 <p>{props.initiative}</p> :
-                <input type="number" min={1} autoComplete="off" pattern="\d*" onBlur={event => props.onInitiativeEntered(Number(event.target.value) || undefined)} className="bg-secondary rounded px-1 w-20" defaultValue={props.initiative} onClick={event => event.preventDefault()} />
+                <Input type="number" min={1} autoComplete="off" pattern="\d*" onBlur={event => props.onInitiativeEntered(Number(event.target.value) || undefined)} className="bg-secondary rounded px-1 w-20" defaultValue={props.initiative} onClick={event => event.preventDefault()} />
             }
         </div>
     )

@@ -2,8 +2,9 @@ import { useState } from "react"
 import { useAppDispatch, useAppSelector } from "../app/hooks"
 import { addCharacter, addEmptyParty, duplicateParty, removeCharacter, removeParty, setCurrentParty } from "../features/chars/CharactersSlice"
 import { VscAdd, VscPerson, VscServerEnvironment, VscTrash } from "react-icons/vsc";
-import { PrimaryButton, SecondaryButton } from "./Buttons"
 import { CharacterAllegiance, CharacterType } from "../features/shared";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 
 function Setup() {
 
@@ -42,17 +43,17 @@ function Setup() {
         <div className="flex flex-col h-full">
             <div className="text-center flex flex-row justify-around ">
                 <p className="text-lg font-bold">Parties</p>
-                <VscAdd className="absolute right-4 top-2 scale-125" onClick={event => {
+                <VscAdd className="absolute right-4 scale-125" onClick={event => {
                     setNewParty(newParty !== undefined ? undefined : "")
                 }} />
             </div>
             {newParty !== undefined ?
                 <div className="flex flex-row content-evenly m-2">
-                    <input className="grow rounded px-1 bg-secondary mr-4" value={newParty} type="text" onChange={event => setNewParty(event.target.value)}></input>
-                    <PrimaryButton text="Create" onClick={() => {
+                    <Input className="grow rounded px-1 bg-secondary mr-4" value={newParty} type="text" onChange={event => setNewParty(event.target.value)}></Input>
+                    <Button onClick={() => {
                         dispatch(addEmptyParty(newParty))
                         setNewParty(undefined)
-                    }} />
+                    }}>Create</Button>
                 </div>
                 :
                 <></>
@@ -67,19 +68,19 @@ function Setup() {
                                     <div className="flex flex-col gap-2 ">
                                         {!deleteConfirm && newCharacter === undefined ?
                                             <div className="flex flex-row gap-1 mx-2 flex-wrap">
-                                                <PrimaryButton text="Set as current party" onClick={() => dispatch(setCurrentParty(partyIndex))} />
-                                                <SecondaryButton text="Add character" onClick={() => setNewCharacter(newCharacter !== undefined ? undefined : "")} />
-                                                <SecondaryButton text="Duplicate party" onClick={() => dispatch(duplicateParty(partyIndex))} />
-                                                <SecondaryButton text="Rename party" />
-                                                <SecondaryButton text="Delete party" onClick={() => setDeleteConfirm(true)} />
+                                                <Button onClick={() => dispatch(setCurrentParty(partyIndex))}>Set as current party</Button>
+                                                <Button variant={"outline"} onClick={() => setNewCharacter(newCharacter !== undefined ? undefined : "")}>Add character</Button>
+                                                <Button variant={"outline"} onClick={() => dispatch(duplicateParty(partyIndex))}>Duplicate party</Button>
+                                                <Button variant={"outline"} disabled>Rename party</Button>
+                                                <Button variant={"outline"} onClick={() => setDeleteConfirm(true)}>Delete party</Button>
                                             </div>
                                             :
                                             <></>
                                         }
                                         {deleteConfirm ?
                                             <div className="flex flex-row gap-1 mx-2 justify-evenly">
-                                                <SecondaryButton text="Do not delete party" onClick={() => setDeleteConfirm(false)} />
-                                                <PrimaryButton text="Delete party" onClick={() => { dispatch(removeParty(partyIndex)); setDeleteConfirm(false); setExpanded(undefined) }} />
+                                                <Button variant={"outline"} onClick={() => setDeleteConfirm(false)}>Do not delete party</Button>
+                                                <Button onClick={() => { dispatch(removeParty(partyIndex)); setDeleteConfirm(false); setExpanded(undefined) }}>Delete party</Button>
                                             </div>
                                             :
                                             <></>
@@ -88,11 +89,11 @@ function Setup() {
                                             <div className="flex flex-col m-2 gap-2">
                                                 <div className="flex flex-row gap-2">
                                                     <label>Name</label>
-                                                    <input className="grow rounded px-1 bg-secondary" value={newCharacter} type="text" onChange={event => setNewCharacter(event.target.value)} autoComplete="off" list="autocompleteOff" ></input>
+                                                    <Input className="grow rounded px-1 bg-secondary" value={newCharacter} type="text" onChange={event => setNewCharacter(event.target.value)} autoComplete="off" list="autocompleteOff" ></Input>
                                                 </div>
                                                 <div className="flex flex-row gap-2">
                                                     <label>Allegiance</label>
-                                                    <select value={newCharAllegiance} onChange={event => setNewCharAllegiance(Number(event.target.value))} className="bg-secondary rounded">
+                                                    <select title="Character Allegiance" value={newCharAllegiance} onChange={event => setNewCharAllegiance(Number(event.target.value))} className="bg-secondary rounded">
                                                         <option value={0}>Friendly</option>
                                                         <option value={1}>Enemy</option>
                                                         <option value={2}>Neutral</option>
@@ -100,13 +101,13 @@ function Setup() {
                                                 </div>
                                                 <div className="flex flex-row gap-2">
                                                     <p>Type</p>
-                                                    <select value={newCharType} onChange={event => setNewCharType(Number(event.target.value))} className="bg-secondary rounded">
+                                                    <select title="Character Player Type" value={newCharType} onChange={event => setNewCharType(Number(event.target.value))} className="bg-secondary rounded">
                                                         <option value={0}>PC</option>
                                                         <option value={1}>NPC</option>
                                                     </select>
                                                 </div>
                                                 <div className="flex flex-row gap-2">
-                                                    <PrimaryButton text="Add Character" onClick={() => {
+                                                    <Button onClick={() => {
                                                         dispatch(addCharacter({
                                                             partyIndex: partyIndex, character: {
                                                                 name: newCharacter,
@@ -115,8 +116,8 @@ function Setup() {
                                                             }
                                                         }))
                                                         closeNewCharacter()
-                                                    }} />
-                                                    <SecondaryButton text="Cancel" onClick={closeNewCharacter} />
+                                                    }}>Add Character</Button>
+                                                    <Button variant={"outline"} onClick={closeNewCharacter}>Cancel</Button>
                                                 </div>
                                             </div>
                                             :
@@ -130,12 +131,12 @@ function Setup() {
                                                         <p>{char.name}</p>
                                                     </div>
 
-                                                    <button className="mr-4 select-none" onClick={() => {
+                                                    <Button variant={"destructive"} className="mr-4 select-none" onClick={() => {
                                                         dispatch(removeCharacter({
                                                             partyIndex: partyIndex,
                                                             characterIndex: charIndex
                                                         }))
-                                                    }} ><VscTrash /></button>
+                                                    }} ><VscTrash /></Button>
                                                 </div>
                                             ))}
                                         </div>
