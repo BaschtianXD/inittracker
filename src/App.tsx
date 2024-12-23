@@ -6,8 +6,8 @@ import { Tabs, TabsList, TabsContent, TabsTrigger } from './components/ui/tabs'
 function App() {
 
   return (
-    <div>
-      <Tabs defaultValue="fight" className="items-center">
+    <div className='flex justify-center'>
+      <Tabs defaultValue="fight" className="grow max-w-[800px]">
         <TabsList className='grid w-full grid-cols-2'>
           <TabsTrigger value="fight">Fight</TabsTrigger>
           <TabsTrigger value="setup">Setup</TabsTrigger>

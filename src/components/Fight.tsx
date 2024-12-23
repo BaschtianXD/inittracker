@@ -58,9 +58,9 @@ function Fight() {
                         <p className="text-lg font-bold">Initiative</p>
                     </div>
                     <div>
-                        <div className='grow flex flex-col divide-y-2'>
+                        <ul className='grow flex flex-col divide-y-2'>
                             {upperChars
-                                .map((char, index, arr) => <div>
+                                .map((char, index, arr) =>
                                     <FightCharacter
                                         character={char.char}
                                         initiative={char.init}
@@ -87,8 +87,8 @@ function Fight() {
                                         }
                                         key={char.char.name}
                                     />
-                                </div>)}
-                        </div>
+                                )}
+                        </ul>
                         <div className="m-auto text-center mt-4">
                             {isInFight ?
                                 <div className="flex flex-col items-center gap-2">
@@ -105,8 +105,8 @@ function Fight() {
                         {isInFight && benched && benched.length > 0 ?
                             <div className="mt-6">
                                 <p className="text-lg font-bold text-center">Not participating</p>
-                                <div className="grow flex flex-col divide-y-2">
-                                    {benched.map(char => (
+                                <ul className="grow flex flex-col divide-y-2">
+                                    {benched.map((char, index) => (
                                         <FightCharacter
                                             character={char.char}
                                             initiative={inits.get(char.char)}
@@ -122,10 +122,10 @@ function Fight() {
                                                     if (inits.delete(char.char)) { setInits(new Map(inits)) }
                                                 }
                                             }}
-                                            key={char.index}
+                                            key={index}
                                         />
                                     ))}
-                                </div>
+                                </ul>
                             </div>
                             :
                             <></>
