@@ -23,7 +23,8 @@ function saveStore(state: any) {
 }
 
 export const store = configureStore({
-    reducer: { characterReducer },
+    reducer: characterReducer,
+    devTools: process.env.NODE_ENV !== 'production',
     preloadedState: loadStore()
 })
 

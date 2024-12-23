@@ -23,7 +23,6 @@ function FightCharacter(props: FightCharacterProps) {
         <li className={className} draggable={props.inFight && props.isCurrentTurn} key={props.index} >
             <p onClick={_ => {
                 props.inFight ? setEditMode(!editMode) : undefined
-                console.log("Edit mode" + !editMode)
             }}>{(props.isCurrentTurn && props.inFight ? "➡️ " : "") + props.character.name}</p>
             {props.inFight && !editMode ?
                 <p>{props.initiative}</p> :

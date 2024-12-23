@@ -1,18 +1,14 @@
 import { useState } from "react"
 import { useAppSelector } from "../app/hooks"
 import FightCharacter from "./FightCharacter"
-import { VscPlay } from "react-icons/vsc";
 import { Character } from "../features/shared"
 import { Button } from "./ui/button";
 
 function Fight() {
     const chars = useAppSelector(state => {
-        if (state.characterReducer.currentParty !== undefined) {
-            return state.characterReducer.parties[state.characterReducer.currentParty].characters
+        if (state.currentParty !== undefined) {
+            return state.parties[state.currentParty].characters
         } else {
-            console.log(state.characterReducer.currentParty)
-            console.log(state.characterReducer.parties)
-            console.log("No party selected")
             return []
         }
     })
@@ -97,7 +93,7 @@ function Fight() {
                                 </div>
                                 :
                                 <div className="flex flex-col items-center gap-2 text-xl">
-                                    <Button onClick={toggleIsInFight}>Start Fight <VscPlay /></Button>
+                                    <Button onClick={toggleIsInFight}>Start Fight ▶️</Button>
                                 </div>
                             }
                         </div>

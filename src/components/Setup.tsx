@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { useAppDispatch, useAppSelector } from "../app/hooks"
 import { addCharacter, addEmptyParty, duplicateParty, loadDemoParties, removeCharacter, removeParty, renameParty, setCurrentParty } from "../features/chars/CharactersSlice"
-import { VscAdd, VscPerson, VscServerEnvironment, VscTrash } from "react-icons/vsc";
 import { CharacterAllegiance, CharacterType } from "../features/shared";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -19,8 +18,8 @@ import { Label } from "./ui/label";
 function Setup() {
 
     const dispatch = useAppDispatch()
-    const groups = useAppSelector(state => state.characterReducer.parties)
-    const currentParty = useAppSelector(state => state.characterReducer.currentParty)
+    const groups = useAppSelector(state => state.parties)
+    const currentParty = useAppSelector(state => state.currentParty)
     const [expanded, setExpanded] = useState(undefined as number | undefined)
     const [newParty, setNewParty] = useState("")
     const [newCharacter, setNewCharacter] = useState("")
@@ -40,11 +39,11 @@ function Setup() {
         const color = allegiance === CharacterAllegiance.Friendly ? "text-green-500" : allegiance === CharacterAllegiance.Neutral ? "text-neutral-900" : "text-red-700"
         if (type === CharacterType.Pc) {
             return (
-                <VscPerson className={color} />
+                <span className={color}>PC</span>
             )
         } else {
             return (
-                <VscServerEnvironment className={color} />
+                <span className={color}>NPC</span>
             )
         }
     }
@@ -209,7 +208,7 @@ function Setup() {
                 <div className="grow flex flex-col items-center justify-center h-full">
                     <div className="flex flex-row items-center justify-center">
                         <p>Press</p>
-                        <VscAdd className="mx-1" />
+                        <p>➕</p>
                         <p>to add a new party</p>
                         <p>or load our demo parties</p>
                         <Button onClick={() => dispatch(loadDemoParties())}>Load Demo Parties</Button>
