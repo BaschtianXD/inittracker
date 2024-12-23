@@ -1,18 +1,14 @@
 import { useState } from "react"
-import { useAppSelector, useAppDispatch } from "../app/hooks"
+import { useAppSelector } from "../app/hooks"
 import FightCharacter from "./FightCharacter"
-import { VscPlay } from "react-icons/vsc";
-import { PrimaryButton, SecondaryButton } from "./Buttons"
 import { Character } from "../features/shared"
+import { Button } from "./ui/button";
 
 function Fight() {
     const chars = useAppSelector(state => {
-        if (state.characterReducer.currentParty !== undefined) {
-            return state.characterReducer.parties[state.characterReducer.currentParty].characters
+        if (state.currentParty !== undefined) {
+            return state.parties[state.currentParty].characters
         } else {
-            console.log(state.characterReducer.currentParty)
-            console.log(state.characterReducer.parties)
-            console.log("No party selected")
             return []
         }
     })
@@ -32,7 +28,7 @@ function Fight() {
 
     }
     const benched = chars?.map((char, index) => { return { char: char, index: index } }).filter(char => inits.get(char.char) === undefined)
-    const upperChars = chars?.filter((char, index) => !isInFight || inits.get(char) !== undefined)
+    const upperChars = chars?.filter((char) => !isInFight || inits.get(char) !== undefined)
         .map((char, index) => { return { char: char, init: inits.get(char), index: index } })
         .sort((a, b) => {
             if (isInFight) {
@@ -41,6 +37,13 @@ function Fight() {
                 return 0
             }
         })
+
+    const advanceTurn = () => {
+        setCurrentTurn((currentTurn + 1) % inits.size)
+        // var msg = new SpeechSynthesisUtterance() // TODO feature? turn announcement using local speech synthesis
+        // msg.text = upperChars[(currentTurn + 1) % inits.size].char.name + ", your move"
+        // window.speechSynthesis.speak(msg);
+    }
 
     return (
         <div className="py-2 h-full">
@@ -51,9 +54,9 @@ function Fight() {
                         <p className="text-lg font-bold">Initiative</p>
                     </div>
                     <div>
-                        <div className='grow flex flex-col divide-y-2'>
+                        <ul className='grow flex flex-col divide-y-2'>
                             {upperChars
-                                .map((char, index, arr) => <div>
+                                .map((char, index, arr) =>
                                     <FightCharacter
                                         character={char.char}
                                         initiative={char.init}
@@ -80,17 +83,17 @@ function Fight() {
                                         }
                                         key={char.char.name}
                                     />
-                                </div>)}
-                        </div>
+                                )}
+                        </ul>
                         <div className="m-auto text-center mt-4">
                             {isInFight ?
                                 <div className="flex flex-col items-center gap-2">
-                                    <PrimaryButton text="Advance turn" onClick={() => setCurrentTurn((currentTurn + 1) % inits.size)} />
-                                    <SecondaryButton text="Fight finished" onClick={(toggleIsInFight)} />
+                                    <Button variant={"default"} onClick={advanceTurn}>Advance Turn</Button>
+                                    <Button variant={"secondary"} onClick={(toggleIsInFight)}>Fight finished</Button>
                                 </div>
                                 :
                                 <div className="flex flex-col items-center gap-2 text-xl">
-                                    <PrimaryButton text="Start Fight" icon={<VscPlay />} onClick={toggleIsInFight} />
+                                    <Button onClick={toggleIsInFight}>Start Fight ▶️</Button>
                                 </div>
                             }
                         </div>
@@ -98,8 +101,8 @@ function Fight() {
                         {isInFight && benched && benched.length > 0 ?
                             <div className="mt-6">
                                 <p className="text-lg font-bold text-center">Not participating</p>
-                                <div className="grow flex flex-col divide-y-2">
-                                    {benched.map(char => (
+                                <ul className="grow flex flex-col divide-y-2">
+                                    {benched.map((char, index) => (
                                         <FightCharacter
                                             character={char.char}
                                             initiative={inits.get(char.char)}
@@ -115,10 +118,10 @@ function Fight() {
                                                     if (inits.delete(char.char)) { setInits(new Map(inits)) }
                                                 }
                                             }}
-                                            key={char.index}
+                                            key={index}
                                         />
                                     ))}
-                                </div>
+                                </ul>
                             </div>
                             :
                             <></>

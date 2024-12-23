@@ -2,6 +2,7 @@
   "name": "combattracker",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -12,22 +13,30 @@
     "@fortawesome/free-regular-svg-icons": "^6.0.0",
     "@fortawesome/free-solid-svg-icons": "^6.0.0",
     "@fortawesome/react-fontawesome": "^0.1.17",
-    "@reduxjs/toolkit": "^1.8.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-icons": "^4.3.1",
-    "react-redux": "^7.2.6",
+    "@radix-ui/react-dialog": "^1.1.4",
+    "@radix-ui/react-label": "^2.1.1",
+    "@radix-ui/react-slot": "^1.1.1",
+    "@radix-ui/react-tabs": "^1.1.2",
+    "@reduxjs/toolkit": "^2.5.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-redux": "^9.2.0",
+    "tailwind-merge": "^2.5.5",
+    "tailwindcss-animate": "^1.0.7",
     "tailwindcss-safe-area": "^0.2.2"
   },
   "devDependencies": {
-    "@types/react": "^17.0.33",
-    "@types/react-dom": "^17.0.10",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
     "@types/react-redux": "^7.1.23",
-    "@vitejs/plugin-react": "^1.0.7",
+    "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.2",
     "postcss": "^8.4.7",
     "tailwindcss": "^3.0.23",
-    "typescript": "^4.5.4",
-    "vite": "^2.8.0"
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3"
   }
 }

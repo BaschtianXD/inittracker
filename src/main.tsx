@@ -5,11 +5,15 @@ import App from './App'
 import { Provider } from 'react-redux'
 import { store } from './app/store'
 
-ReactDOM.render(
+import { createRoot } from 'react-dom/client';
+
+const domNode = document.getElementById('root');
+const root = createRoot(domNode!);
+
+root.render(
   <React.StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 )

@@ -6,11 +6,41 @@ interface CharacterState {
     parties: Party[]
 }
 
-const testState: CharacterState = { // TODO clean this up
+const demoState: CharacterState = {
     currentParty: 0,
     parties: [
         {
-            name: "Pathfinder 1",
+            name: "5 Friends Base",
+            characters: [
+                {
+                    name: "Erokthan",
+                    allegiance: CharacterAllegiance.Friendly,
+                    type: CharacterType.Pc
+                },
+                {
+                    name: "Lini",
+                    allegiance: CharacterAllegiance.Friendly,
+                    type: CharacterType.Pc
+                },
+                {
+                    name: "Seoni",
+                    allegiance: CharacterAllegiance.Friendly,
+                    type: CharacterType.Pc
+                },
+                {
+                    name: "Ayva",
+                    allegiance: CharacterAllegiance.Friendly,
+                    type: CharacterType.Pc
+                },
+                {
+                    name: "Frederich",
+                    allegiance: CharacterAllegiance.Friendly,
+                    type: CharacterType.Pc
+                },
+            ]
+        },
+        {
+            name: "5 Friends Fight 1",
             characters: [
                 {
                     name: "Erokthan",
@@ -38,157 +68,22 @@ const testState: CharacterState = { // TODO clean this up
                     type: CharacterType.Pc
                 },
                 {
-                    name: "Diederich",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Gegner",
+                    name: "Troll 1",
                     allegiance: CharacterAllegiance.Enemy,
                     type: CharacterType.Npc
                 },
-            ]
-        },
-        {
-            name: "Pathfinder 2",
-            characters: [
                 {
-                    name: "Erokthan",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
+                    name: "Troll 2",
+                    allegiance: CharacterAllegiance.Enemy,
+                    type: CharacterType.Npc
                 },
                 {
-                    name: "Lini",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Seoni",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Ayva",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Frederich",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Diederich",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-            ]
-        },
-        {
-            name: "Test Many",
-            characters: [
-                {
-                    name: "Erokthan",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Lini",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Seoni",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Ayva",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Frederich",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Diederich",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Döner",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Döner mit Käse",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Großer Döner",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Großer Döner mit Käse",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Börek",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Falaffeldöner",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Großer Falaffeldöner",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Lahmacum",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Lahmacum mit Käse",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Grillteller",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Überbackes Lammfilet mit Metaxasauce",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Halbes Hähnchen",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Gyros",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
-                },
-                {
-                    name: "Überbackenes Gyros",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
+                    name: "Mage",
+                    allegiance: CharacterAllegiance.Enemy,
+                    type: CharacterType.Npc
                 }
             ]
-        },
+        }
     ]
 }
 
@@ -235,11 +130,21 @@ export const characterSlice = createSlice({
                 state.currentParty = undefined
             }
             state.parties.splice(action.payload, 1)
+        },
+        renameParty: (state, action: PayloadAction<{ partyIndex: number, newName: string }>) => {
+            const party = state.parties[action.payload.partyIndex]
+            if (party) {
+                party.name = action.payload.newName
+            }
+        },
+        loadDemoParties: (state) => {
+            state.currentParty = 1
+            state.parties = demoState.parties
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { setCurrentParty, addCharacter, removeCharacter, addEmptyParty, duplicateParty, removeParty } = characterSlice.actions
+export const { setCurrentParty, addCharacter, removeCharacter, addEmptyParty, duplicateParty, removeParty, renameParty, loadDemoParties } = characterSlice.actions
 
 export default characterSlice.reducer
