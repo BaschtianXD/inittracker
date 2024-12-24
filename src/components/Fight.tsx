@@ -131,8 +131,8 @@ function Fight() {
                     </div>
                 </div>
                 :
-                <div className="absolute top-1/2 w-full text-center">
-                    <p>Go to setup and select a current party</p>
+                <div className="top-1/2 text-center flex justify-center w-full mt-10">
+                    <p className="">Go to setup and select a current party</p>
                 </div>
             }
         </div>
