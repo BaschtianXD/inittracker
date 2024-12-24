@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import characterReducer from '../features/chars/CharactersSlice'
+import characterReducer, { CharacterStateT } from '../features/chars/CharactersSlice'
 
 function loadStore() {
     try {
@@ -7,8 +7,10 @@ function loadStore() {
         if (serializedState === null) {
             return undefined;
         }
-        return JSON.parse(serializedState);
+        const parsed = CharacterStateT.parse(JSON.parse(serializedState))
+        return parsed
     } catch (err) {
+        console.error("Unable to parse stored data: " + JSON.stringify(err))
         return undefined;
     }
 }
@@ -17,8 +19,8 @@ function saveStore(state: any) {
     try {
         const serializedState = JSON.stringify(state);
         localStorage.setItem('state', serializedState);
-    } catch {
-        // do nothing
+    } catch (err) {
+        console.error("Unable to save store: " + JSON.stringify(err))
     }
 }
 

@@ -4,12 +4,14 @@ import FightCharacter from "./FightCharacter"
 import { Character } from "../features/shared"
 import { Button } from "./ui/button";
 
+const emptyArr: Character[] = []
+
 function Fight() {
     const chars = useAppSelector(state => {
         if (state.currentParty !== undefined) {
             return state.parties[state.currentParty].characters
         } else {
-            return []
+            return emptyArr
         }
     })
     const [inits, setInits] = useState(new Map() as Map<Character, number>)

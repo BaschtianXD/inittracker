@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Character, CharacterAllegiance, CharacterType, Party } from '../shared'
+import { Character, PartyT } from '../shared'
+import { z } from 'zod'
 
-interface CharacterState {
-    currentParty?: number,
-    parties: Party[]
-}
+export const CharacterStateT = z.object({
+    currentParty: z.number().optional(),
+    parties: z.array(PartyT)
+})
+type CharacterState = z.infer<typeof CharacterStateT>
 
 const demoState: CharacterState = {
     currentParty: 0,
@@ -14,28 +16,28 @@ const demoState: CharacterState = {
             characters: [
                 {
                     name: "Erokthan",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
+                    allegiance: "Friendly",
+                    type: "Pc"
                 },
                 {
                     name: "Lini",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
+                    allegiance: "Friendly",
+                    type: "Pc"
                 },
                 {
                     name: "Seoni",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
+                    allegiance: "Friendly",
+                    type: "Pc"
                 },
                 {
                     name: "Ayva",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
+                    allegiance: "Friendly",
+                    type: "Pc"
                 },
                 {
                     name: "Frederich",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
+                    allegiance: "Friendly",
+                    type: "Pc"
                 },
             ]
         },
@@ -44,43 +46,43 @@ const demoState: CharacterState = {
             characters: [
                 {
                     name: "Erokthan",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
+                    allegiance: "Friendly",
+                    type: "Pc"
                 },
                 {
                     name: "Lini",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
+                    allegiance: "Friendly",
+                    type: "Pc"
                 },
                 {
                     name: "Seoni",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
+                    allegiance: "Friendly",
+                    type: "Pc"
                 },
                 {
                     name: "Ayva",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
+                    allegiance: "Friendly",
+                    type: "Pc"
                 },
                 {
                     name: "Frederich",
-                    allegiance: CharacterAllegiance.Friendly,
-                    type: CharacterType.Pc
+                    allegiance: "Friendly",
+                    type: "Pc"
                 },
                 {
                     name: "Troll 1",
-                    allegiance: CharacterAllegiance.Enemy,
-                    type: CharacterType.Npc
+                    allegiance: "Enemy",
+                    type: "Npc"
                 },
                 {
                     name: "Troll 2",
-                    allegiance: CharacterAllegiance.Enemy,
-                    type: CharacterType.Npc
+                    allegiance: "Enemy",
+                    type: "Npc"
                 },
                 {
                     name: "Mage",
-                    allegiance: CharacterAllegiance.Enemy,
-                    type: CharacterType.Npc
+                    allegiance: "Enemy",
+                    type: "Npc"
                 }
             ]
         }
