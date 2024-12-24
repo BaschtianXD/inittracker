@@ -25,19 +25,19 @@ function Setup() {
     const [newCharacter, setNewCharacter] = useState("")
     const [rename, setRename] = useState("")
 
-    const [newCharAllegiance, setNewCharAllegiance] = useState(CharacterAllegiance.Friendly)
-    const [newCharType, setNewCharType] = useState(CharacterType.Pc)
+    const [newCharAllegiance, setNewCharAllegiance] = useState<CharacterAllegiance>("Friendly")
+    const [newCharType, setNewCharType] = useState<CharacterType>("Pc")
 
 
     const closeNewCharacter = () => {
         setNewCharacter("")
-        setNewCharAllegiance(0)
-        setNewCharType(0)
+        setNewCharAllegiance("Friendly")
+        setNewCharType("Pc")
     }
 
     const getCharacterIcon = (allegiance: CharacterAllegiance, type: CharacterType) => {
-        const color = allegiance === CharacterAllegiance.Friendly ? "text-green-500" : allegiance === CharacterAllegiance.Neutral ? "text-neutral-900" : "text-red-700"
-        if (type === CharacterType.Pc) {
+        const color = allegiance === "Friendly" ? "text-green-500" : allegiance === "Neutral" ? "text-neutral-900" : "text-red-700"
+        if (type === "Pc") {
             return (
                 <span className={color}>PC</span>
             )
@@ -108,17 +108,17 @@ function Setup() {
                                                             </div>
                                                             <div className="flex flex-row gap-2">
                                                                 <Label>Allegiance</Label>
-                                                                <select title="Character Allegiance" value={newCharAllegiance} onChange={event => setNewCharAllegiance(Number(event.target.value))} className="bg-secondary rounded">
-                                                                    <option value={0}>Friendly</option>
-                                                                    <option value={1}>Enemy</option>
-                                                                    <option value={2}>Neutral</option>
+                                                                <select title="Character Allegiance" value={newCharAllegiance} onChange={event => setNewCharAllegiance(event.target.value as CharacterAllegiance)} className="bg-secondary rounded">
+                                                                    <option value={"Friendly"}>Friendly</option>
+                                                                    <option value={"Enemy"}>Enemy</option>
+                                                                    <option value={"Neutral"}>Neutral</option>
                                                                 </select>
                                                             </div>
                                                             <div className="flex flex-row gap-2">
                                                                 <Label>Type</Label>
-                                                                <select title="Character Player Type" value={newCharType} onChange={event => setNewCharType(Number(event.target.value))} className="bg-secondary rounded">
-                                                                    <option value={0}>PC</option>
-                                                                    <option value={1}>NPC</option>
+                                                                <select title="Character Player Type" value={newCharType} onChange={event => setNewCharType(event.target.value as CharacterType)} className="bg-secondary rounded">
+                                                                    <option value={"Pc"}>PC</option>
+                                                                    <option value={"Npc"}>NPC</option>
                                                                 </select>
                                                             </div>
 
